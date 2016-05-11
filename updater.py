@@ -42,7 +42,9 @@ def update_twitter_profile(name, temp_colour, config):
 
     api = tweepy.API(auth)
 
+    # This was disabled because for some reason it returns a 404 error.
     # api.update_profile_colors(profile_sidebar_border_color=temp_colour)
+
     api.update_profile(name=name)
 
 
