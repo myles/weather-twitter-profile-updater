@@ -1,3 +1,4 @@
+import os
 import json
 
 import emoji
@@ -64,7 +65,10 @@ def main(config):
 
 
 if __name__ == "__main__":
-    with open('config.json', 'r') as f:
+    config_file = os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                               'config.json')
+
+    with open(config_file, 'r') as f:
         config = json.loads(f.read())
 
     main(config)
