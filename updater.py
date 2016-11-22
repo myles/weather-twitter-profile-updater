@@ -1,5 +1,6 @@
 import os
 import json
+from datetime import datetime
 
 import emoji
 import tweepy
@@ -28,6 +29,18 @@ ICON_TO_EMOJI = {
     'partly-cloudy-night': ''  # TODO Figure out an apporpriatea emoji.
     }
 
+SPECIAL_DAYS_EMOJI = {
+    '01-01': ':fireworks:',
+    '03-20': ':tulip:',
+    '06-21': ':surfer:',
+    '09-19': ':birthday:',
+    '09-22': ':fallen_leaf:',
+    '10-31': ':ghost:',
+    '12-21': ':snowman:',
+    '12-25': ':santa:',
+    '12-31': ':tada:',
+    }
+
 
 def get_weather(config):
     forecast = forecastio.load_forecast(config['api_key'], config['lat'],
@@ -51,11 +64,20 @@ def update_twitter_profile(name, temp_colour, config):
 
 def main(config):
     weather = get_weather(config['forecast'])
-
     weather_emoji = ICON_TO_EMOJI.get(weather.icon, '')
 
-    twitter_name = emoji.emojize('{1} {0}'.format(config['twitter']['name'],
-                                 weather_emoji), use_aliases=True)
+    today = datetime.now().strftime('%m-%d')
+    special_day_emoji = SPECIAL_DAYS_EMOJI.get(today)
+
+    if special_day_emoji:
+        twitter_name = emoji.emojize('{0} {1} {2}'.format(weather_emoji,
+                                                          'Myles B',
+                                                          special_day_emoji),
+                                     use_aliases=True)
+    else:
+        twitter_name = emoji.emojize('{0} {1}'.format(weather_emoji,
+                                                      'Myles Braithwaite'),
+                                     use_aliases=True)
 
     data = TEMPERATURE_TO_COLOUR
     temp_colour = data.get(weather.temperature, data[min(data.keys(),
