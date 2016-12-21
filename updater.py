@@ -71,7 +71,7 @@ def main(config):
 
     if special_day_emoji:
         twitter_name = emoji.emojize('{0} {1} {2}'.format(weather_emoji,
-                                                          'Myles B',
+                                                          'Myles',
                                                           special_day_emoji),
                                      use_aliases=True)
     else:
