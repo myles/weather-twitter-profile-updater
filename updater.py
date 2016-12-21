@@ -36,6 +36,7 @@ SPECIAL_DAYS_EMOJI = {
     '09-19': ':birthday:',
     '09-22': ':fallen_leaf:',
     '10-31': ':ghost:',
+    '11-01': ':skull:',
     '12-21': ':snowman:',
     '12-25': ':santa:',
     '12-31': ':tada:',
