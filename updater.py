@@ -22,7 +22,7 @@ ICON_TO_EMOJI = {
     'clear-night': ':milky_way:',
     'rain': ':umbrella:',
     'snow': ':snowflake:',
-    'sleet': '',  # TODO Figure out an appropriate emoji for sleet.
+    'sleet': ':cloud_snow:',
     'wind': ':dash:',
     'fog': ':foggy:',
     'partly-cloudy-day': ':partly_sunny:',
