@@ -1,6 +1,8 @@
-import os
+#!/usr/bin/env python3
+
 import json
 from datetime import datetime
+from os.path import join, realpath, dirname
 
 import emoji
 import tweepy
@@ -18,28 +20,32 @@ TEMPERATURE_TO_COLOUR = {
     }
 
 ICON_TO_EMOJI = {
-    'clear-day': ':sunny:',
-    'clear-night': ':milky_way:',
-    'rain': ':umbrella:',
-    'snow': ':snowflake:',
-    'sleet': ':cloud_snow:',
-    'wind': ':dash:',
-    'fog': ':foggy:',
-    'partly-cloudy-day': ':partly_sunny:',
-    'partly-cloudy-night': ''  # TODO Figure out an apporpriatea emoji.
+    'clear-day': '☀️',
+    'clear-night': '🌌',
+    'rain': '☔️',
+    'snow': '🌨',
+    'sleet': '',
+    'wind': '💨',
+    'fog': '🌁',
+    'cloudy': '☁️',
+    'partly-cloudy-day': '⛅️',
+    'partly-cloudy-night': '',
+    'hail': '',
+    'thunderstorm': '⚡️',
+    'tornado': '🌪'
     }
 
 SPECIAL_DAYS_EMOJI = {
-    '01-01': ':fireworks:',
-    '03-20': ':tulip:',
-    '06-21': ':surfer:',
-    '09-19': ':birthday:',
-    '09-22': ':fallen_leaf:',
-    '10-31': ':ghost:',
-    '11-01': ':skull:',
-    '12-21': ':snowman:',
-    '12-25': ':santa:',
-    '12-31': ':tada:',
+    '01-01': '🎆',
+    '03-20': '🌷',
+    '06-21': '🏄',
+    '09-19': '🎂',
+    '09-22': '🍂',
+    '10-31': '👻',
+    '11-01': '💀',
+    '12-21': '☃️',
+    '12-25': '🎅',
+    '12-31': '🎉',
     }
 
 
@@ -71,27 +77,22 @@ def main(config):
     special_day_emoji = SPECIAL_DAYS_EMOJI.get(today)
 
     if special_day_emoji:
-        twitter_name = emoji.emojize('{0} {1} {2}'.format(weather_emoji,
-                                                          'Myles',
-                                                          special_day_emoji),
-                                     use_aliases=True)
+        twitter_name = '{0} {1} {2}'.format(weather_emoji, 'Myles',
+                                            special_day_emoji)
     else:
-        twitter_name = emoji.emojize('{0} {1}'.format(weather_emoji,
-                                                      'Myles Braithwaite'),
-                                     use_aliases=True)
+        twitter_name = '{0} {1}'.format(weather_emoji, 'Myles Braithwaite')
 
     data = TEMPERATURE_TO_COLOUR
     temp_colour = data.get(weather.temperature, data[min(data.keys(),
-                           key=lambda k: abs(k-weather.temperature))])
+                           key=lambda k: abs(k - weather.temperature))])
 
     update_twitter_profile(twitter_name, temp_colour, config['twitter'])
 
 
 if __name__ == "__main__":
-    config_file = os.path.join(os.path.dirname(os.path.realpath(__file__)),
-                               'config.json')
+    config_file = join(dirname(realpath(__file__)), 'config.json')
 
-    with open(config_file, 'r') as f:
-        config = json.loads(f.read())
+    with open(config_file, 'r') as fobj:
+        config = json.loads(fobj.read())
 
     main(config)
