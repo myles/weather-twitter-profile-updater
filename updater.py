@@ -4,7 +4,6 @@ import json
 from datetime import datetime
 from os.path import join, realpath, dirname
 
-import emoji
 import tweepy
 import forecastio
 
