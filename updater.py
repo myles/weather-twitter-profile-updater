@@ -2,21 +2,23 @@
 
 import json
 from datetime import datetime
-from os.path import join, realpath, dirname
+from os.path import dirname, join, realpath
 
-import tweepy
 import forecastio
+import tweepy
 
 # Colours came from <http://www.metoffice.gov.uk/guide/weather/symbols>.
-TEMPERATURE_TO_COLOUR = {
-    -30: 'FFFFFF', -28: 'F5F5F5', -26: 'EBEBEB', -24: 'E1E1E1', -22: 'BEBEBE',
-    -20: '828282', -18: '545572', -16: '5D107B', -14: '59467C', -12: '2D107B',
-    -10: '00107D', -8: '003BAE', -6: '002BF6', -4: '0083F8', -2: '00C0FA',
-    0: '00FFFE', 2: '00F6C9', 4: '00D592', 6: '00A96A', 8: '00A83F',
-    10: '00C646', 12: '00FC48', 14: 'C9FC4B', 16: 'FFFC4D', 18: 'F1EB8A',
-    20: 'EBCA72', 22: 'E5AD57', 24: 'FFA934', 26: 'FF5520', 28: 'FF0A17',
-    30: 'D7060F', 32: 'BA040C', 34: '9F0308', 36: '820205'
-    }
+TEMPERATURE_TO_COLOUR = {-30: 'FFFFFF', -28: 'F5F5F5', -26: 'EBEBEB',
+                         -24: 'E1E1E1', -22: 'BEBEBE', -20: '828282',
+                         -18: '545572', -16: '5D107B', -14: '59467C',
+                         -12: '2D107B', -10: '00107D', -8: '003BAE',
+                         -6: '002BF6', -4: '0083F8', -2: '00C0FA',
+                         0: '00FFFE', 2: '00F6C9', 4: '00D592', 6: '00A96A',
+                         8: '00A83F', 10: '00C646', 12: '00FC48', 14: 'C9FC4B',
+                         16: 'FFFC4D', 18: 'F1EB8A', 20: 'EBCA72',
+                         22: 'E5AD57', 24: 'FFA934', 26: 'FF5520',
+                         28: 'FF0A17', 30: 'D7060F', 32: 'BA040C',
+                         34: '9F0308', 36: '820205'}
 
 ICON_TO_EMOJI = {
     'clear-day': '☀️',
@@ -37,7 +39,9 @@ ICON_TO_EMOJI = {
 SPECIAL_DAYS_EMOJI = {
     '01-01': '🎆',
     '03-20': '🌷',
+    '04-20': '🍍',
     '06-21': '🏄',
+    '07-01': '🇨🇦',
     '09-19': '🎂',
     '09-22': '🍂',
     '10-31': '👻',
